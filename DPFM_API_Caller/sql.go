@@ -11,8 +11,7 @@ func (c *DPFMAPICaller) HeaderRead(
 	input *dpfm_api_input_reader.SDC,
 	log *logger.Logger,
 ) *dpfm_api_output_formatter.Header {
-	where := fmt.Sprintf("WHERE header.BillOfMaterial = %d ", input.BillOfMaterial.BillOfMaterial)
-	where = fmt.Sprintf("%s \n AND ( header.OwnerProductionPlantBusinessPartner = %d ) ", where, input.BusinessPartner)
+	where := fmt.Sprintf("WHERE header.BillOfMaterial = %d ", input.Header.BillOfMaterial)
 	rows, err := c.db.Query(
 		`SELECT 
 			header.BillOfMaterial
@@ -37,8 +36,7 @@ func (c *DPFMAPICaller) ItemsRead(
 	input *dpfm_api_input_reader.SDC,
 	log *logger.Logger,
 ) *[]dpfm_api_output_formatter.Item {
-	where := fmt.Sprintf("WHERE item.BillOfMaterial IS NOT NULL\nAND header.BillOfMaterial = %d", input.BillOfMaterial.BillOfMaterial)
-	where = fmt.Sprintf("%s \n AND ( header.OwnerProductionPlantBusinessPartner = %d ) ", where, input.BusinessPartner)
+	where := fmt.Sprintf("WHERE item.BillOfMaterial IS NOT NULL\nAND header.BillOfMaterial = %d", input.Header.BillOfMaterial)
 	rows, err := c.db.Query(
 		`SELECT 
 			item.BillOfMaterial, item.BillOfMaterialItem

@@ -31,7 +31,6 @@ type Message struct {
 
 type Header struct {
 	BillOfMaterial                      int     `json:"BillOfMaterial"`
-	OwnerProductionPlantBusinessPartner int     `json:"OwnerProductionPlantBusinessPartner"`
 	IsMarkedForDeletion                 *bool   `json:"IsMarkedForDeletion"`
 	Items                               *[]Item `json:"Items"`
 }
